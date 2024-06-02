@@ -27,7 +27,7 @@
 // emm...remember the power of power in math
 
 #define OP(x) PRINT1(x)
-#define END_OP printf(END);
+#define END_OP fprintf(FILE_, END);
 
 #ifndef __NO_STDIO_H__ //for custom-implemented `fprintf`
 #include <stdio.h>
