@@ -39,8 +39,10 @@
 #define FILE_ stdout
 // use `FILE_` for not confusing with <stdio.h>'s `FILE` type
 
-#if FLUSH!=0
-  setbuf(FILE_, NULL);
+#if FLUSH != 0
+# define MAY_FLUSH fflush(FILE_);
+#else
+# define MAY_FLUSH
 #endif
 
 #define _FMT(x) "%" #x SEP
@@ -60,6 +62,10 @@
     ,unsigned long:_FMT(lu)  \
     ,unsigned long long:_FMT(llu)  \
     ,default:_FMT(p) \
-  ),x); // note we assume the else ones are pointer, which may be not suitable all time, in this case you can add the right one
+  ),x);// note we assume the else ones are pointer, which may be not suitable all time, in this case you can add the right one
 
-#define print(...) EVAL(FOR_EACH(OP, __VA_ARGS__))
+#define print(...) do{\
+  EVAL(FOR_EACH(OP, __VA_ARGS__));
+  MAY_FLUSH \
+} while(0)
+
