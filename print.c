@@ -1,4 +1,8 @@
 // 2022/12/20T22:45 litlighilit
+
+#ifndef C_PRINT_H
+#define C_PRINT_H
+
 #define EMPTY
 #define DEFER(id) id EMPTY
 
@@ -69,3 +73,4 @@
   MAY_FLUSH \
 } while(0)
 
+#endif // C_PRINT_H
